@@ -1,1 +1,6 @@
-test: teste
+general: 
+  endpoint: /city
+
+cache:
+  name: city-cache
+  duration: 3600

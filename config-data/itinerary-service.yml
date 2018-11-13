@@ -1,0 +1,6 @@
+general: 
+  endpoint: /itinerary
+
+cache:
+  name: itinerary-cache
+  duration: 3600
