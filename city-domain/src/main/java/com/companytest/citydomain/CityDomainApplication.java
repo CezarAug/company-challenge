@@ -11,4 +11,6 @@ public class CityDomainApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CityDomainApplication.class, args);
 	}
+
+
 }

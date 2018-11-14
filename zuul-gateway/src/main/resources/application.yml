@@ -1,0 +1,18 @@
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    city:
+      path: /city/**
+      serviceId: CITY-DOMAIN
+      stripPrefix: true
+    itinerary:
+      path: /itinerary/**
+      serviceId: ITINERARY-SERVICE
+      stripPrefix: true
