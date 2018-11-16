@@ -1,0 +1,8 @@
+general: 
+  endpoint: /city
+
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
