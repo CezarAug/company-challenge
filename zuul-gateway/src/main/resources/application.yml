@@ -2,7 +2,7 @@ eureka:
   instance:
     preferIpAddress: true
   client:
-    registerWithEureka: false
+    registerWithEureka: true
     fetchRegistry: true
 
 zuul:

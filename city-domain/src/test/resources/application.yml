@@ -1,5 +1,5 @@
 general:
-  endpoint: /itinerary-test
+  endpoint: /route-test
 
 spring:
   cloud:

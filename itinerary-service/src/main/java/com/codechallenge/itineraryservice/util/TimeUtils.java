@@ -16,6 +16,6 @@ public class TimeUtils {
         LocalTime l2 = LocalTime.parse(endTime.concat(":00"));
 
         //We're calculating in a short range, but do not do this in production.
-        return (int) (long) MINUTES.between(l1, l2);
+        return (int) MINUTES.between(l1, l2);
     }
 }

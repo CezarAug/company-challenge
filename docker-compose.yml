@@ -1,0 +1,79 @@
+version: "3"
+services:
+
+  # Config-server container
+  config-server:
+    container_name: config-server
+    image: challenge/config-server:1.0.0
+    networks:
+      - challenge
+    expose:
+      - "8001"
+
+  # Api Gateway, exposed to all requests
+  zuul-gateway:
+    container_name: zuul-gateway
+    image: challenge/zuul-gateway:1.0.0
+    depends_on:
+      - "config-server"
+    environment:
+      CONFIG_SERVER: "http://config-server:8001"
+      JAVA_OPTS: "-Dspring.profiles.active=docker"
+    networks:
+      - challenge
+    ports:
+      - "8060:8060"
+  
+  # All the other services down below will communicate with each other using the docker network.
+  eureka-server:
+    container_name: eureka-server
+    image: challenge/eureka-server:1.0.0
+    networks:
+      - challenge  
+    expose:
+      - "8002"
+    ports:
+      - "8002:8002"
+
+  city-domain:
+    container_name: city-domain
+    image: challenge/city-domain:1.0.0
+    depends_on:
+      - config-server
+      - mongodb
+    links:
+      - "mongodb"
+    environment:
+      CONFIG_SERVER: "http://config-server:8001"
+      JAVA_OPTS: "-Dspring.profiles.active=docker"
+    networks:
+      - challenge
+    expose:
+      - "8010"
+    
+  itinerary-service:
+    container_name: itinerary-service
+    image: challenge/itinerary-service:1.0.0
+    depends_on:
+      - "config-server"
+    environment:
+      CONFIG_SERVER: "http://config-server:8001"
+      JAVA_OPTS: "-Dspring.profiles.active=docker"
+    networks:
+      - challenge  
+    expose:
+      - "8020"
+
+  mongodb:
+    stdin_open: true
+    tty: true
+    image: mongo:latest
+    container_name: "mongodb"
+    expose:
+      - "27017"
+    networks:
+      - challenge
+
+networks:
+  challenge: {}
+

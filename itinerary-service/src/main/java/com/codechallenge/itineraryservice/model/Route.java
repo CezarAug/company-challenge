@@ -1,17 +1,17 @@
 package com.codechallenge.itineraryservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
 
 /**
- * CityDTO model class
+ * Route model class
  *
  * @Author Cezar Augusto
  */
@@ -21,21 +21,22 @@ import javax.validation.constraints.NotNull;
 @ToString
 @EqualsAndHashCode
 @ApiModel
-public class CityDTO {
+@Accessors(chain = true)
+public class Route {
 
-    @ApiModelProperty(value = "GRU - Guarulhos", name = "Departure city")
+    @ApiModelProperty(example = "GRU - Guarulhos", name = "Departure city")
     @NotNull
     private String city;
 
-    @ApiModelProperty(value = "REC - Recife", name = "Destination city")
+    @ApiModelProperty(example = "REC - Recife", name = "Destination city")
     @NotNull
     private String destination;
 
-    @ApiModelProperty(value = "00:00", name = "Departure time")
+    @ApiModelProperty(example = "00:00", name = "Departure time")
     @NotNull
     private String departureTime;
 
-    @ApiModelProperty(value = "03:00", name = "Arrival time")
+    @ApiModelProperty(example = "03:00", name = "Arrival time")
     @NotNull
     private String arrivalTime;
 

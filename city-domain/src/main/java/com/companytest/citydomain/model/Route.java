@@ -13,7 +13,7 @@ import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotNull;
 
 /**
- * City model class
+ * Route model class
  *
  * @Author Cezar Augusto
  */
@@ -22,27 +22,27 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 @EqualsAndHashCode
-@ApiModel
+@ApiModel(description = "Defines a route between two cities.")
 @Accessors(chain = true)
-public class City {
+public class Route {
 
     @Id
     @JsonIgnore
     private String id;
 
-    @ApiModelProperty(value = "GRU - Guarulhos", name = "Departure city")
+    @ApiModelProperty(example = "GRU - Guarulhos", name = "Departure city", required =  true)
     @NotNull
     private String city;
 
-    @ApiModelProperty(value = "REC - Recife", name = "Destination city")
+    @ApiModelProperty(example = "REC - Recife", name = "Destination city")
     @NotNull
     private String destination;
 
-    @ApiModelProperty(value = "00:00", name = "Departure time")
+    @ApiModelProperty(example = "00:00", name = "Departure time")
     @NotNull
     private String departureTime;
 
-    @ApiModelProperty(value = "03:00", name = "Arrival time")
+    @ApiModelProperty(example = "03:00", name = "Arrival time")
     @NotNull
     private String arrivalTime;
 

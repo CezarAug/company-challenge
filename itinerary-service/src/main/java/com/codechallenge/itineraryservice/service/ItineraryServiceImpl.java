@@ -1,7 +1,7 @@
 package com.codechallenge.itineraryservice.service;
 
-import com.codechallenge.itineraryservice.dao.CityDao;
-import com.codechallenge.itineraryservice.model.CityDTO;
+import com.codechallenge.itineraryservice.dao.RouteDao;
+import com.codechallenge.itineraryservice.model.Route;
 import com.codechallenge.itineraryservice.model.Itinerary;
 import com.codechallenge.itineraryservice.util.TimeUtils;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -26,12 +26,11 @@ import java.util.stream.Collectors;
 public class ItineraryServiceImpl implements ItineraryService {
 
     @Autowired
-    CityDao cityDao;
+    RouteDao routeDao;
 
-    @NonNull
-    private List<List<CityDTO>> validRoutes;
+    private List<List<Route>> validRoutes = new ArrayList<>();
 
-    private Integer minTime;
+    private Integer minTime = Integer.MAX_VALUE;
 
     @HystrixCommand(fallbackMethod="getFallbackItinerary")
     public Itinerary getItinerary(String originCity, String destinationCity) {
@@ -47,14 +46,14 @@ public class ItineraryServiceImpl implements ItineraryService {
                 .setDestination(destinationCity)
                 .setOrigin(originCity)
                 .setFastItinerary(getFastestItinerary())
-                .setFewerConnectionsItinerary(getShortestItinerary());
+                .setShortestItinerary(getShortestItinerary());
     }
 
     /**
      * Checks within all routes list found, which one is the fastest.
      * @return A list containing all fastest routes list
      */
-    private List<List<CityDTO>> getFastestItinerary() {
+    private List<List<Route>> getFastestItinerary() {
         return validRoutes.stream()
                 .filter(validRoute -> this.getTotalTime(validRoute) == minTime)
                 .collect(Collectors.toList());
@@ -65,7 +64,7 @@ public class ItineraryServiceImpl implements ItineraryService {
      * Checks within all routes list found, which one is the shortest (with less connections).
      * @return A list containing all fastest routes list
      */
-    private List<List<CityDTO>> getShortestItinerary() {
+    private List<List<Route>> getShortestItinerary() {
         return validRoutes.stream()
                 .filter(validRoute -> validRoute.size() == validRoutes.stream().mapToInt(shortestRoute -> shortestRoute.size()).min().getAsInt())
                 .collect(Collectors.toList());
@@ -85,9 +84,8 @@ public class ItineraryServiceImpl implements ItineraryService {
 
         //getting first routes
         //Origin first connections, if there is a direct path, there is no need to check it further
-        Optional<List<CityDTO>> firstDestinations = Optional.ofNullable(cityDao.getCityByName(originCity));
+        Optional<List<Route>> firstDestinations = Optional.ofNullable(routeDao.getCityByName(originCity));
 
-        log.debug("total located routes: " + firstDestinations.get().size());
 
         if (firstDestinations.isPresent() && !firstDestinations.get().isEmpty()) {
             if (validateIfDestinationWasFound(firstDestinations.get(), destinationCity)) {
@@ -127,8 +125,8 @@ public class ItineraryServiceImpl implements ItineraryService {
      * @param currentRoute
      * @param finalDestination
      */
-    private void navigateThroughRoutes(List<CityDTO> routes, CityDTO currentRoute, String finalDestination) {
-        Optional<List<CityDTO>> foundRoutes = Optional.ofNullable(cityDao.getCityByName(currentRoute.getDestination()));
+    private void navigateThroughRoutes(List<Route> routes, Route currentRoute, String finalDestination) {
+        Optional<List<Route>> foundRoutes = Optional.ofNullable(routeDao.getCityByName(currentRoute.getDestination()));
 
         if (validateIfDestinationWasFound(foundRoutes.get(), finalDestination)) {
             //Final destination reached, adding the current path to the validRoutes list
@@ -136,7 +134,7 @@ public class ItineraryServiceImpl implements ItineraryService {
                     .stream()
                     .filter(route -> route.getDestination().equals(finalDestination))
                     .forEach(route -> {
-                        List<CityDTO> finalRoute = new ArrayList<>();
+                        List<Route> finalRoute = new ArrayList<>();
                         finalRoute.addAll(routes);
                         finalRoute.add(route);
                         validRoutes.add(finalRoute);
@@ -152,7 +150,7 @@ public class ItineraryServiceImpl implements ItineraryService {
                 .stream()
                 .filter(route -> isNewDestination(routes, route.getDestination()))
                 .forEach(route -> {
-                    List<CityDTO> newRoutes = new ArrayList<>();
+                    List<Route> newRoutes = new ArrayList<>();
                     newRoutes.addAll(routes);
                     newRoutes.add(route);
                     navigateThroughRoutes(newRoutes, route, finalDestination);
@@ -166,7 +164,7 @@ public class ItineraryServiceImpl implements ItineraryService {
      * Checks if the informed list of routes has the shortest duration in time.
      * @param routes
      */
-    private void setMinimumTime(List<CityDTO> routes) {
+    private void setMinimumTime(List<Route> routes) {
         int totalTime = this.getTotalTime(routes);
         if (totalTime < minTime) {
             minTime = totalTime;
@@ -178,20 +176,20 @@ public class ItineraryServiceImpl implements ItineraryService {
      * @param routes
      * @return total time spent in all routes, in minutes.
      */
-    private int getTotalTime(List<CityDTO> routes) {
+    private int getTotalTime(List<Route> routes) {
         int totalTime = 0;
-        for (CityDTO route : routes) {
+        for (Route route : routes) {
             totalTime += TimeUtils.calculateTime(route.getDepartureTime(), route.getArrivalTime());
         }
         return totalTime;
     }
 
 
-    private boolean validateIfDestinationWasFound(List<CityDTO> routes, String destination) {
+    private boolean validateIfDestinationWasFound(List<Route> routes, String destination) {
         return routes.stream().filter(route -> route.getDestination().equals(destination)).findAny().isPresent();
     }
 
-    private boolean isNewDestination(List<CityDTO> routes, String destination) {
+    private boolean isNewDestination(List<Route> routes, String destination) {
         return !routes.stream().filter(route -> route.getCity().equals(destination)).findAny().isPresent();
     }
 
@@ -200,7 +198,7 @@ public class ItineraryServiceImpl implements ItineraryService {
         return new Itinerary()
                 .setOrigin(originCity)
                 .setDestination(destinationCity)
-                .setFewerConnectionsItinerary(new ArrayList<>())
+                .setShortestItinerary(new ArrayList<>())
                 .setFastItinerary(new ArrayList<>());
     }
 }

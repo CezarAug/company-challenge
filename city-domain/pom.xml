@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.companytest</groupId>
-    <artifactId>city-domain</artifactId>
+    <artifactId>route-domain</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>city-domain</name>
-    <description>Code Challenge: city domain service</description>
+    <name>route-domain</name>
+    <description>Code Challenge: route domain service</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
