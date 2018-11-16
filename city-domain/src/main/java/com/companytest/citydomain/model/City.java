@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @EqualsAndHashCode
 @ApiModel
+@Accessors(chain = true)
 public class City {
 
     @Id

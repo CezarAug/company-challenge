@@ -9,10 +9,10 @@ zuul:
   ignoredServices: "*"
   routes:
     city:
-      path: /city/**
+      path: /city-service/**
       serviceId: CITY-DOMAIN
       stripPrefix: true
     itinerary:
-      path: /itinerary/**
+      path: /itinerary-service/**
       serviceId: ITINERARY-SERVICE
       stripPrefix: true

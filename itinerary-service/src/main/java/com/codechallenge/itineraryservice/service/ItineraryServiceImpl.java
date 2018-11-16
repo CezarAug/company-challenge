@@ -4,6 +4,7 @@ import com.codechallenge.itineraryservice.dao.CityDao;
 import com.codechallenge.itineraryservice.model.CityDTO;
 import com.codechallenge.itineraryservice.model.Itinerary;
 import com.codechallenge.itineraryservice.util.TimeUtils;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     private Integer minTime;
 
-
+    @HystrixCommand(fallbackMethod="getFallbackItinerary")
     public Itinerary getItinerary(String originCity, String destinationCity) {
         minTime = Integer.MAX_VALUE;
 
@@ -42,22 +43,17 @@ public class ItineraryServiceImpl implements ItineraryService {
         validRoutes.stream()
                 .forEach(this::setMinimumTime);
 
-
-        System.out.println(getShortestItinerary());
-        log.info("fastest path in time: " + minTime + " minutes.");
-        System.out.println(getFastestItinerary());
-
         return new Itinerary()
                 .setDestination(destinationCity)
                 .setOrigin(originCity)
                 .setFastItinerary(getFastestItinerary())
                 .setFewerConnectionsItinerary(getShortestItinerary());
-
-//        return cityDao.getCityByName(originCity);
-
     }
 
-
+    /**
+     * Checks within all routes list found, which one is the fastest.
+     * @return A list containing all fastest routes list
+     */
     private List<List<CityDTO>> getFastestItinerary() {
         return validRoutes.stream()
                 .filter(validRoute -> this.getTotalTime(validRoute) == minTime)
@@ -65,6 +61,10 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     }
 
+    /**
+     * Checks within all routes list found, which one is the shortest (with less connections).
+     * @return A list containing all fastest routes list
+     */
     private List<List<CityDTO>> getShortestItinerary() {
         return validRoutes.stream()
                 .filter(validRoute -> validRoute.size() == validRoutes.stream().mapToInt(shortestRoute -> shortestRoute.size()).min().getAsInt())
@@ -162,18 +162,22 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 
     //Minor helper functions just to keep the code cleaner
-
+    /**
+     * Checks if the informed list of routes has the shortest duration in time.
+     * @param routes
+     */
     private void setMinimumTime(List<CityDTO> routes) {
-        int totalTime = 0;
-        for (CityDTO route : routes) {
-            totalTime += TimeUtils.calculateTime(route.getDepartureTime(), route.getArrivalTime());
-        }
-
+        int totalTime = this.getTotalTime(routes);
         if (totalTime < minTime) {
             minTime = totalTime;
         }
     }
 
+    /**
+     * Calculates the time in minutes across all routes within a list.
+     * @param routes
+     * @return total time spent in all routes, in minutes.
+     */
     private int getTotalTime(List<CityDTO> routes) {
         int totalTime = 0;
         for (CityDTO route : routes) {
@@ -189,5 +193,14 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     private boolean isNewDestination(List<CityDTO> routes, String destination) {
         return !routes.stream().filter(route -> route.getCity().equals(destination)).findAny().isPresent();
+    }
+
+
+    public Itinerary getFallbackItinerary(String originCity, String destinationCity) {
+        return new Itinerary()
+                .setOrigin(originCity)
+                .setDestination(destinationCity)
+                .setFewerConnectionsItinerary(new ArrayList<>())
+                .setFastItinerary(new ArrayList<>());
     }
 }

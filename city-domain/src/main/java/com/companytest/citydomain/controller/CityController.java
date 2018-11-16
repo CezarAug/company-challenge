@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("${general.endpoint}")
+@RequestMapping("${general.endpoint:/city}")
 public class CityController {
 
     @Autowired

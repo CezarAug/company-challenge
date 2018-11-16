@@ -2,3 +2,9 @@ logging:
   level:
     com:
       codechallenge: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, info, health
