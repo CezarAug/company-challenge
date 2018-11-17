@@ -77,7 +77,7 @@ public class SecurityConfig {
                     .and()
                     .httpBasic()
                     .and()
-                    .formLogin().disable();
+                    .csrf().disable();
         }
     }
 

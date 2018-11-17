@@ -16,3 +16,10 @@ zuul:
       path: /itinerary-service/**
       serviceId: ITINERARY-SERVICE
       stripPrefix: true
+
+
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+  eager-load:
+    enabled: true

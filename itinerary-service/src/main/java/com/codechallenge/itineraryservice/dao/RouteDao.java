@@ -12,6 +12,6 @@ import java.util.List;
 @FeignClient("CITY-DOMAIN")
 public interface RouteDao {
 
-    @RequestMapping(value = "/city/{cityName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/route/{cityName}", method = RequestMethod.GET)
     List<Route> getCityByName(@PathVariable("cityName") String cityName);
 }
