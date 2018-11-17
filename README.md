@@ -1,10 +1,10 @@
 # Code Challenge - Itinerary Application
 
 ##### Quick links: 
-[Postman collection](documentations/Company%20challenge.postman_collection) 
-[City contract](documentations/city-domain.yml)
-[Itinerary contract](documentations/itinerary-service.yml)
-[Pipeline proposal](documentations/pipeline.pptx)
+- [Postman collection](documentations/Company%20challenge.postman_collection) 
+- [City contract](documentations/city-domain.yml)
+- [Itinerary contract](documentations/itinerary-service.yml)
+- [Pipeline proposal](documentations/pipeline.pptx)
 
 ![alt text](https://raw.githubusercontent.com/CezarAug/company-challenge/master/documentations/services-diagram.png)
 
@@ -123,7 +123,7 @@ There is a suggestion of initial set of data to test it (Don't forget the author
     - user: user
     - password: password
 
-There is also a [Postman](documentations/Company%20challenge.postman_collection.json) project available for all endpoints.
+There is also a [Postman](documentations/Company%20challenge.postman_collection) project available for all endpoints.
 
 # Used libraries and Frameworks
 
