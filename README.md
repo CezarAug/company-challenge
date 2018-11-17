@@ -1,7 +1,7 @@
 # Code Challenge - Itinerary Application
 
 ##### Quick links: 
-[Postman collection](documentations/Company%20challenge.postman_collection.json) 
+[Postman collection](documentations/Company%20challenge.postman_collection) 
 [City contract](documentations/city-domain.yml)
 [Itinerary contract](documentations/itinerary-service.yml)
 [Pipeline proposal](documentations/pipeline.pptx)
