@@ -195,6 +195,8 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 
     public Itinerary getFallbackItinerary(String originCity, String destinationCity) {
+        System.out.println("Circuit open");
+
         return new Itinerary()
                 .setOrigin(originCity)
                 .setDestination(destinationCity)

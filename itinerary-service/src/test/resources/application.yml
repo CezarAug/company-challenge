@@ -1,7 +1,2 @@
 general:
   endpoint: /itinerary-test
-
-spring:
-  cloud:
-    config:
-      enabled: false

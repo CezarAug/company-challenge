@@ -1,0 +1,566 @@
+{
+	"info": {
+		"_postman_id": "6460841c-400b-43da-8948-78d23724569d",
+		"name": "Adidas challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All services",
+			"item": [
+				{
+					"name": "City domain",
+					"item": [
+						{
+							"name": "Get all routes",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"city\": \"SAO\",\n\t\"destination\": \"REC\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8060/city-service/city",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8060",
+									"path": [
+										"city-service",
+										"city"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all routes by city name",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"city\": \"SAO\",\n\t\"destination\": \"REC\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8060/city-service/city/BAH",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8060",
+									"path": [
+										"city-service",
+										"city",
+										"BAH"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Insert routes",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n\t{\n\t\t\"city\": \"Sao Paulo\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t},\n\t{\n\t\t\"city\": \"Guarulhos\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"07:00\"\n\t},\n\t{\n\t\t\"city\": \"Guarulhos\",\n\t\t\"destination\": \"Belo Horizonte\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"02:00\"\n\t},\n\t{\n\t\t\"city\": \"Belo Horizonte\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"01:00\"\n\t},\n\t{\n\t\t\"city\": \"Recife\",\n\t\t\"destination\": \"Guarulhos\",\n\t\t\"departureTime\": \"04:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t},\n\t{\n\t\t\"city\": \"Recife\",\n\t\t\"destination\": \"Sao Paulo\",\n\t\t\"departureTime\": \"04:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t}\n]"
+								},
+								"url": {
+									"raw": "http://localhost:8060/city-service/city",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8060",
+									"path": [
+										"city-service",
+										"city"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete all routes",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"city\": \"SAO\",\n\t\"destination\": \"REC\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8060/city-service/city",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8060",
+									"path": [
+										"city-service",
+										"city"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Itinerary service",
+					"item": [
+						{
+							"name": "Get Itinerary",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "password",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "user",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8060/itinerary-service/itinerary/Belo Horizonte/Guarulhos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8060",
+									"path": [
+										"itinerary-service",
+										"itinerary",
+										"Belo Horizonte",
+										"Guarulhos"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "787c4445-19fb-48a9-8587-2befaaf0b951",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "62f83b48-95e7-4ca4-ae7b-fa549a0e2f7c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "All services (standalone, without Zuul proxy)",
+			"item": [
+				{
+					"name": "City domain",
+					"item": [
+						{
+							"name": "Get all routes",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"city\": \"SAO\",\n\t\"destination\": \"REC\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8010/city-service/city",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8010",
+									"path": [
+										"city-service",
+										"city"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all routes by city name",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"city\": \"SAO\",\n\t\"destination\": \"REC\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8010/city-service/city/BAH",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8010",
+									"path": [
+										"city-service",
+										"city",
+										"BAH"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Insert routes",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n\t{\n\t\t\"city\": \"Sao Paulo\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t},\n\t{\n\t\t\"city\": \"Guarulhos\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"07:00\"\n\t},\n\t{\n\t\t\"city\": \"Guarulhos\",\n\t\t\"destination\": \"Belo Horizonte\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"02:00\"\n\t},\n\t{\n\t\t\"city\": \"Belo Horizonte\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"01:00\"\n\t},\n\t{\n\t\t\"city\": \"Recife\",\n\t\t\"destination\": \"Guarulhos\",\n\t\t\"departureTime\": \"04:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t},\n\t{\n\t\t\"city\": \"Recife\",\n\t\t\"destination\": \"Sao Paulo\",\n\t\t\"departureTime\": \"04:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t}\n]"
+								},
+								"url": {
+									"raw": "http://localhost:8010/city-service/city",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8010",
+									"path": [
+										"city-service",
+										"city"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete all routes",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"city\": \"SAO\",\n\t\"destination\": \"REC\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8010/city-service/city",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8010",
+									"path": [
+										"city-service",
+										"city"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Itinerary service",
+					"item": [
+						{
+							"name": "Get Itinerary",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8020/itinerary-service/itinerary/Belo Horizonte/Guarulhos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8020",
+									"path": [
+										"itinerary-service",
+										"itinerary",
+										"Belo Horizonte",
+										"Guarulhos"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "787c4445-19fb-48a9-8587-2befaaf0b951",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "62f83b48-95e7-4ca4-ae7b-fa549a0e2f7c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Same requests for local running instances.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "21ee1f1b-9b11-4092-851c-2727efa91bf5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9c9a283-bbc2-4620-a527-76dbc1e6f11d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "(Recommended) Insert All routes",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"city\": \"Sao Paulo\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t},\n\t{\n\t\t\"city\": \"Guarulhos\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"07:00\"\n\t},\n\t{\n\t\t\"city\": \"Guarulhos\",\n\t\t\"destination\": \"Belo Horizonte\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"02:00\"\n\t},\n\t{\n\t\t\"city\": \"Belo Horizonte\",\n\t\t\"destination\": \"Recife\",\n\t\t\"departureTime\": \"00:00\",\n\t\t\"arrivalTime\": \"01:00\"\n\t},\n\t{\n\t\t\"city\": \"Recife\",\n\t\t\"destination\": \"Guarulhos\",\n\t\t\"departureTime\": \"04:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t},\n\t{\n\t\t\"city\": \"Recife\",\n\t\t\"destination\": \"Sao Paulo\",\n\t\t\"departureTime\": \"04:00\",\n\t\t\"arrivalTime\": \"06:00\"\n\t}\n]"
+				},
+				"url": {
+					"raw": "http://localhost:8060/city-service/city",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"city-service",
+						"city"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

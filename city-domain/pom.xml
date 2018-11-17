@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.companytest</groupId>
-    <artifactId>route-domain</artifactId>
+    <artifactId>city-domain</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>route-domain</name>
+    <name>city-domain</name>
     <description>Code Challenge: route domain service</description>
 
     <parent>
